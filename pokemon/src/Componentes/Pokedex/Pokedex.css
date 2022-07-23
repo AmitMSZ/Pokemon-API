@@ -1,0 +1,7 @@
+.Tabla{
+    display: inline-flex;
+    border: solid;
+}
+.a{
+    display: inline-flex !important;
+}

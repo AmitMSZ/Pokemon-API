@@ -1,0 +1,13 @@
+
+.card{
+    margin: 1rem;
+}
+.i{
+    padding: 0% !important;
+    display: inline-flex;
+    text-align: center;
+    background-color: #bebbb6;
+}
+.e{
+    background-color: #e5e5e5;
+}
