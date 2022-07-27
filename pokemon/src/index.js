@@ -16,6 +16,7 @@ root.render(
                         <Route path='/Historial' element={<Historial/>}/>
                         <Route path='/Combate' element={<Combate/>}/>
                         <Route path='/Pokedex' element={<Pokedex/>}/>
+                        <Route path='/Pokedex/:pokemon_name' element={<Pokedex/>}/>
                     </Route>
                 </Routes>
         </BrowserRouter>

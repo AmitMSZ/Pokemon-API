@@ -4,12 +4,8 @@ import { Box, Container } from "@mui/system";
 import MenuIcon from '@mui/icons-material/Menu';
 import CatchingPokemonIcon from '@mui/icons-material/CatchingPokemon';
 import {Outlet} from "react-router-dom";
-import Combate from "../Combate/Combate";
-import Historial from "../Historial/Historial";
-import Pokedex from "../Pokedex/Pokedex";
 import { Link } from "react-router-dom";
 import './MenuBar.css'
-import Pokemon from "../Pokemon/Pokemon";
 import { styled, alpha } from '@mui/material/styles';
 import SearchIcon from '@mui/icons-material/Search';
 
@@ -57,15 +53,17 @@ const Search = styled('div')(({ theme }) => ({
 const MenuBar = (props) => {
 
     const pages = [
-        {key:1,name:'Historial',path:'/Historial',element:<Historial/>},
-        {key:2,name: 'Combate',path:'/Combate',element:<Combate/>},
-        {key:3,name:"Pokedex",path:'/Pokedex',element:<Pokedex/>},
+        {key:1,name:'Historial',path:'/Historial'},
+        {key:2,name: 'Combate',path:'/Combate'},
+        {key:3,name:"Pokedex",path:'/Pokedex'},
     ];
 
+    
+    let x = ['pidgey']
     const [anchorElNav, setAnchorElNav] = useState(null);
     const [search, setSearch] = useState('');
-
-
+    
+    
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
     };
@@ -73,10 +71,14 @@ const MenuBar = (props) => {
         setAnchorElNav(null);
     };
     const handleChangeSearch = (event) => {
-        setSearch(event.target.value)
+        setSearch(event.target.value)   
     }
     const handleClickSearch = ()=>{
-        <Pokemon enviar={search}/>
+        x.push(search)
+    }
+
+    const handleClickHistorial = ()=>{
+        console.log(x)
     }
     return ( 
         <>
@@ -168,9 +170,14 @@ const MenuBar = (props) => {
                                     sx={{ my: 2, color: 'inherit', display: 'block' }}
                                 >
                                     <Typography textAlign="center">
+                                        {pages.name !== 'Historial' && 
                                             <Link to={pages.path}>
                                                 {pages.name}
-                                            </Link>
+                                            </Link>}
+                                        {pages.name === 'Historial' && 
+                                            <Link to={pages.path} onClick={handleClickHistorial}>
+                                                {pages.name}
+                                            </Link>}
                                         </Typography>
                                 </Button>
                                 ))}
@@ -182,11 +189,17 @@ const MenuBar = (props) => {
                                 <StyledInputBase
                                 placeholder="Buscar Pokemon…"
                                 onChange={handleChangeSearch}
-                                onClick={handleClickSearch}
                                 inputProps={{ 'aria-label': 'search' }}
                                 />
+                            <Button 
+                                sx={{flexGrow: 0.1, display: { xs: 'none', sm: 'flex', color: 'inherit'}}}
+                                onClick={handleClickSearch}
+                                >
+                                <Typography textAlign="center">
+                                    <Link to={`/Pokedex/${search}`}>Search</Link>
+                                </Typography>
+                            </Button>
                         </Search>
-                        <button onClick={handleClickSearch}>ads</button>
                     </Toolbar>
                 </Container>
             </AppBar>

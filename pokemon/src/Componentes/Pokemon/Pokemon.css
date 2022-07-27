@@ -1,6 +1,8 @@
 
 .card{
+    text-align: center;
     margin: 1rem;
+    background-color: #bebbb6 !important;
 }
 .i{
     padding: 0% !important;

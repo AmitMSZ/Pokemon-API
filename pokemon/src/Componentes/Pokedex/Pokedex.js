@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { Portal, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
+import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import Paper from '@mui/material/Paper';
 import './Pokedex.css'
 import Pokemon from "../Pokemon/Pokemon";
+import { useParams } from "react-router-dom";
 const Pokedex = (props) => {
     const [pokemons, setPokemons] = useState([])
+    let { pokemon_name } = useParams()
     useEffect( () => {
-        fetch('https://pokeapi.co/api/v2/pokemon?limit=100&offset=0')
+        fetch('https://pokeapi.co/api/v2/pokemon?limit=10&offset=0')
             .then(res => res.json())
             .then( (data) => {
                 setPokemons(data.results)
@@ -24,14 +26,17 @@ const Pokedex = (props) => {
                         </TableRow>
                     </TableHead>
                     <TableBody className="Tabla">
-                        {pokemons.map((pokemon, index) => {
-                            return(
-                                <TableRow sx={{maxWidth:'auto'}} className="a" key={index}>
-                                    <TableCell align="center">
-                                        <Pokemon name={pokemon.name}/>
-                                    </TableCell>
-                                </TableRow>)
-                        })}
+                        {pokemon_name === undefined &&
+                            pokemons.map((pokemon, index) => {
+                                return(
+                                    <TableRow sx={{maxWidth:'auto'}} className="a" key={index}>
+                                        <TableCell align="center">
+                                            <Pokemon name={pokemon.name}/>
+                                        </TableCell>
+                                    </TableRow>)
+                            })}
+                        {pokemon_name !== undefined &&
+                        <Pokemon name={pokemon_name}/>}
                     </TableBody>
                 </Table>
             </TableContainer>

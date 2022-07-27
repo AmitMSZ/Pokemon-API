@@ -27,8 +27,7 @@ const Pokemon = (props) => {
     const [urlPokemonFamaleBack, setUrlPokemonFamaleBack] = useState('')
 
     
-    const [pokemonName, setPokemonName] = useState('ditto')
-    const [pokemonInput, setPokemonInput] = useState('')
+    const [pokemonName, setPokemonName] = useState('')
 
     const [codigo, setCodigo] = useState('')
     const [nombre, setNombre] = useState('')
@@ -66,19 +65,13 @@ const Pokemon = (props) => {
                     setExperiencia(data.base_experience)
                 }
             )
-    }, [pokemonName])
+    }, [])
 
-    const handleChange = (event) => {
-        setPokemonInput(event.target.value)
-    }
     const [radio, setRadio] = useState('Normal')
     const handleChangeRadius = (event) => {
         setRadio(event.target.value)
     }
-    const handleClick = () => {
-        setPokemonName(pokemonInput)
-    }
-    
+
     let url1, url2, descript
     if (radio === 'Famale') {
         url1 = urlPokemonFamale
@@ -97,7 +90,6 @@ const Pokemon = (props) => {
     }
     return (
         <>
-            
             <Card sx={{maxWidth: 220}} className='card'>
                 <CardContent className="i">
                         <CardMedia
